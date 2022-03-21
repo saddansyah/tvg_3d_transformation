@@ -15,7 +15,7 @@ class Cube:
     
 
     # method to project 3d point to 2d point
-    #@staticmethod
+    # @staticmethod
     def projection(self, point3D):
         # if(len(point3D) < 4):
         #     point3D = np.append(point3D, 1)
@@ -33,6 +33,7 @@ class Cube:
 
         return point2D
 
+    # method to return 3d cube to 2d cube
     #@staticmethod
     def projected_cube(self):
         scaling = 200
@@ -91,6 +92,10 @@ class Cube:
 
         win.getMouse()
         win.close()  
+
+class Transform:
+    def __init__(self):
+        pass
 
 
 # pemanaggilan class
