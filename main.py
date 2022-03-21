@@ -37,6 +37,15 @@ class Cube:
 
         self.__cube = scaled_cube
 
+    def cube_shearxy(self, shx, shy):
+        xysheared_cube = np.empty((0, 3))
+
+        for point in self.__cube:
+            xysheared_cube = np.append(xysheared_cube, Transform.shearxy(
+                point, shx, shy).reshape((1, 3)), axis=0)
+
+        self.__cube = xysheared_cube
+
     # method to project 3d point to 2d point
     # @staticmethod
     def projection(self, point3D):
@@ -123,9 +132,10 @@ class Cube:
 cube1 = Cube()
 
 # transformasi
-# translasi kubus 35 satuan/pixel ke arah x+, 25 satuan/pixel ke arah y+, dan 25 ke arah z+
-cube1.cube_translation(35, -25, 25)
-cube1.cube_scaling(4, 4, 4)  # perbesaran kubus dengan faktor perbesaran = 4
+cube1.cube_translation(10, -10, 10)  # translasi kubus
+cube1.cube_scaling(3, 3, 3)  # perbesaran kubus dengan faktor perbesaran = 3
+# shear terhadap sumbu x and y dengan shx = 0.5 dan shy = 0.4
+cube1.cube_shearxy(0.5, 0.4)
 
 # display cube
 print(cube1.get_coord())
