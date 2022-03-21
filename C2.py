@@ -78,7 +78,7 @@ def rz(degree):
     return rz
 
 #SHEAR XY
-def shearxy(shx,shy):
+def shearxy():
     global matrix
     sxy = np.array([[1,0,shx,0],
                     [0,1,shy,0],
@@ -87,7 +87,7 @@ def shearxy(shx,shy):
     return sxy
 
 #SHEAR YZ
-def shearyz(shy,shz):
+def shearyz():
     global matrix
     syz = np.array([[1,0,0,0],
                     [0,shy,0,0],
@@ -96,7 +96,7 @@ def shearyz(shy,shz):
     return syz
 
 #SHEAR XZ
-def shearxz(shx,shz):
+def shearxz():
     global matrix
     sxz = np.array([[shx,0,0,0],
                     [0,1,0,0],
