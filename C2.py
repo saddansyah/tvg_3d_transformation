@@ -1,23 +1,54 @@
 from graphics import *
 import numpy as np
 
+#NILAI MATRIX
+def koordinatmatrix():
+    baris = int(input("baris: "))
+    kolum = int(input("kolom: "))
+    Matrix = []
+    print("Entries row-wise: ")
+
+    for i in range(baris):
+        a = []
+        for j in range(kolum):
+            a.append(int(input()))
+        Matrix.append(a)
+    Matrix = np.array(Matrix)
+    return Matrix
+
 #TRANSLASI
-def translasi(tx,ty,tz):
-    global matrix
+def translasi():
+    tx = int(input("tx: "))
+    ty = int(input("ty: "))
+    tz = int(input("tz: "))
     trans = np.array([[1,0,0,tx],
                       [0,1,0,ty],
                       [0,0,1,tz],
                       [0,0,0,1]])
     return trans
+def translasim(matrix,self):
+    translasimtrx = print("Koordinat Translasi: \n", np.dot(matrix,self))
+    return translasimtrx
+translasimat = translasi()
+mekoordinatmatrix = koordinatmatrix()
+metranslasi = translasim(translasimat,mekoordinatmatrix)
 
 #SCALE
-def scale(sx,sy,sz):
-    global matrix
+def scale():
+    sx = int(input("sx: "))
+    sy = int(input("sy: "))
+    sz = int(input("sz: "))
     scale = np.array([[sx,0,0,0],
                       [0,sy,0,0],
                       [0,0,sz,0],
                       [0,0,0,1]])
     return scale
+def scalexyz(matrix,self):
+    scalemtrx = print("Koordinat Scale: \n", np.dot(matrix,self))
+    return scalemtrx
+scalematrix = scale()
+mekoordinatmatrix = koordinatmatrix()
+mescale = scalexyz(scalematrix,mekoordinatmatrix)
 
 #ROTASI X
 def rx(degree):
