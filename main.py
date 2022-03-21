@@ -1,10 +1,11 @@
 import numpy as np
 from graphics import *
 import math
+from transform import *
 
 class Cube:
     def __init__(self):
-        scaling = 100
+        self.__scaling = 100
         self.__cube = np.array([[0,0,0],
                                 [1,0,0],
                                 [1,0,1],
@@ -12,26 +13,16 @@ class Cube:
                                 [0,1,0],
                                 [1,1,0],
                                 [1,1,1],
-                                [0,1,1]])*scaling
+                                [0,1,1]])*self.__scaling
     
     def get_coord(self):
         return self.__cube
-    
-    def translation(self, point, tx, ty, tz) -> np.ndarray:
-        if(len(point) < 4):
-            point = np.append(point, 1)
-            
-        translation_matrix = np.array([[1,0,0,tx],
-                                    [0,1,0,ty],
-                                    [0,0,1,tz],
-                                    [0,0,0,1]])
-        return (translation_matrix @ point)[:-1]
 
-    def cube_translation(self):
+    def cube_translation(self, tx, ty, tz):
         translated_cube = np.empty((0,3))
 
         for point in self.__cube:
-            translated_cube = np.append(translated_cube, self.translation(point, 22, 22, 22).reshape((1,3)), axis=0)
+            translated_cube = np.append(translated_cube, Transform.translation(point, tx, ty, tz).reshape((1,3)), axis=0)
         
         self.__cube = translated_cube
 
@@ -69,8 +60,8 @@ class Cube:
 
     @staticmethod
     def draw_cube(point: list):
-        width = 800
-        height = 800
+        width = 1200
+        height = 720
         margin = 100
         point *= 100
         
@@ -110,16 +101,12 @@ class Cube:
         win.getMouse()
         win.close()  
 
-class Transform:
-    def __init__(self):
-        pass
-
 
 # pemanaggilan class
 cube1 = Cube()
 # print(cube1.get_coord())
-cube1.cube_translation()
-# print(cube1.get_coord())
+cube1.cube_translation(10, 10, 10)
+print(cube1.get_coord())
 projected_cube1 = cube1.projected_cube()
 # print(cube1.get_coord())
 # print(projected_cube1)
