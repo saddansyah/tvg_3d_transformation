@@ -10,8 +10,32 @@ import os
 
 # kubus
 def cube():
-    # membuat objek cube1
-    cube1 = Cube()
+
+    cube_points = np.array([[0,0,0],
+                    [1,0,0],
+                    [1,0,1],
+                    [0,0,1],
+                    [0,1,0],
+                    [1,1,0],
+                    [1,1,1],
+                    [0,1,1]])
+
+    what_cube = input('''What cube?
+                     1. Predefined cube (1x1x1 cube)
+                     2. Userdefined cube (input your own cube)
+                ''')
+
+    if(what_cube == '1'):
+        cube1 = Cube(cube_points)
+    elif(what_cube == '2'):
+        for i in range(8):
+            print(f"Point - {i+1}")
+            for j in range(3):
+                point = int(input(f'Coordinate-{chr(j+120)}: '))
+                cube_points[i][j] = point
+        cube1 = Cube(cube_points)
+
+    # cube1 = Cube(cube)
 
     while True:
         os.system('cls' if os.name in ('nt', 'dos') else 'clear')
@@ -23,7 +47,6 @@ def cube():
             3. shear
             4. rotation
             \ntype the number of transformation you want to choose, \ntype 'stop or STOP' to stop\nyour choice : """))
-
 
         if transform.lower() == 'stop':
             break
