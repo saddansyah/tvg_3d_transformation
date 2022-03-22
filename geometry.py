@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 class Geometry:
         
     def __init__(self, geometry: np.ndarray, screen_width, screen_height):
-        self.__scaling = 75
+        self.__scaling = 80
         self.__geometry = geometry * self.__scaling
 
     def get_coord(self):
