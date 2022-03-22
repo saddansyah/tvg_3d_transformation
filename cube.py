@@ -59,6 +59,9 @@ class Cube(Geometry):
     def cube_shearing(self, shx, shy, shz, sh_type):
         return super().geometry_shearing(shx, shy, shz, sh_type)
 
+    def cube_rotating(self, rx, ry, rz, r_type):
+        return super().geometry_rotation(rx, ry, rz, r_type)
+
     def projected_cube(self):
         return super().projected_geometry()
 
