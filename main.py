@@ -57,6 +57,6 @@ def cube():
             cube1.undraw_geometry()
             cube1.draw_geometry(cube1.projected_cube())
         else:
-            print("error on input, try again")
+            print("error on input, please try again")
 
 cube()

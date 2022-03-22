@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 class Geometry:
         
     def __init__(self, geometry: np.ndarray, screen_width, screen_height):
-        self.__scaling = 100
+        self.__scaling = 80
         self.__geometry = geometry * self.__scaling
 
     def get_coord(self):
@@ -18,7 +18,7 @@ class Geometry:
 
         for point in self.__geometry:
             translated_geometry = np.append(translated_geometry, Transform.translation(
-                point, tx, ty, tz).reshape((1, 3)), axis=0)
+                point, tx, ty, tz, self.__scaling).reshape((1, 3)), axis=0)
 
         self.__geometry = translated_geometry
 
