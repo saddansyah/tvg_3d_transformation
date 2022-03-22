@@ -27,13 +27,13 @@ class Transform:
         return projection_matrix @ reflection_matrix @ point3D
 
     @staticmethod
-    def translation(point: np.ndarray, tx, ty, tz):
+    def translation(point: np.ndarray, tx, ty, tz, scaling):
         if(len(point) < 4):
             point = np.append(point, 1)
 
-        translation_matrix = np.array([[1, 0, 0, tx],
-                                       [0, 1, 0, ty],
-                                       [0, 0, 1, tz],
+        translation_matrix = np.array([[1, 0, 0, tx*scaling],
+                                       [0, 1, 0, ty*scaling],
+                                       [0, 0, 1, tz*scaling],
                                        [0, 0, 0, 1]])
         return (translation_matrix @ point)[:-1]
 

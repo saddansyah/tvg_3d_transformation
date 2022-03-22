@@ -3,7 +3,6 @@ from geometry import *
 
 class Cube(Geometry):
     def __init__(self):
-        self.__scaling = 100
         cube = np.array([[0,0,0],
                          [1,0,0],
                          [1,0,1],
@@ -66,8 +65,8 @@ class Cube(Geometry):
         return super().projected_geometry()
 
     def draw_geometry(self, point: list):
-        marginx = 350
-        marginy = 500
+        marginx = self.__width/2
+        marginy = self.__height/2
 
         self.draw_cartesian(marginx, marginy)
 
