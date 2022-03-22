@@ -38,13 +38,13 @@ class Geometry:
         
         self.__geometry = scaled_geometry
 
-    def geometry_rotation(self, rx, ry, rz, r_type):
-        roteted_geometry = np.empty((0,3))
+    def geometry_rotation(self, rx, ry, rz, r_type, r_axisx, r_axisy, r_axisz):
+        rotated_geometry = np.empty((0,3))
 
         for point in self.__geometry:
-            roteted_geometry = np.append(roteted_geometry, Transform.rotation(point, (-rx, -ry, -rz), r_type).reshape((1,3)), axis=0)
+            rotated_geometry = np.append(rotated_geometry, Transform.rotation(point, (-rx, -ry, -rz), r_type, (r_axisx, r_axisy, r_axisz)).reshape((1,3)), axis=0)
         
-        self.__geometry = roteted_geometry        
+        self.__geometry = rotated_geometry        
 
     # method to return 3d cube to 2d cube
 

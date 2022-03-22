@@ -136,13 +136,17 @@ class Transform:
         return (rotatez_matrix @ point)[:-1]
 
     @classmethod
-    def rotation(cls, point: np.ndarray, r_factor: tuple, r_type: str):
+    def rotation(cls, point: np.ndarray, r_factor: tuple, r_type: str, r_axis:tuple):
         if(len(point) < 4):
             point = np.append(point, 1)
 
+        point = Transform.translation(point, -r_axis[0], -r_axis[1], -r_axis[2])
+
         if r_type == "x":
-            return cls.rotationx(point, r_factor[0])
+            point = cls.rotationx(point, r_factor[0])
         elif r_type == "y":
-            return cls.rotationy(point, r_factor[1])
+            point = cls.rotationy(point, r_factor[1])
         elif r_type == "z":
-            return cls.rotationz(point, r_factor[2])
+            point =  cls.rotationz(point, r_factor[2])
+
+        return Transform.translation(point, r_axis[0], r_axis[1], r_axis[2])
