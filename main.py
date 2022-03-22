@@ -1,3 +1,10 @@
+# Kelompok 10 :
+# 1. Christina Angraeni Panellah    - 456840
+# 2. Faizah Bestiyana Darmawati     - 456364
+# 3. Imam Arif Hadi Pramono         - 460546
+# 4. Luthfi Izzuddin Hanif          - 463605
+# 5. Saddan Syah Akbar              - 460566
+
 from cube import *
 import os
 
