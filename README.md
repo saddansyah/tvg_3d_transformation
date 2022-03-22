@@ -1,4 +1,4 @@
-# tvg_3d_transformation
+## 3D Transformation with [graphics.py](https://mcsp.wartburg.edu/zelle/python/)
  Tugas Kelompok TVG - Kelompok 10
 
  ##### Anggota:
