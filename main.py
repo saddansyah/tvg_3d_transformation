@@ -3,6 +3,7 @@ from graphics import *
 import math
 from transform import *
 
+
 class Cube:
     def __init__(self, screen_width, screen_height):
         self.__scaling = 100
@@ -36,16 +37,17 @@ class Cube:
         z.setOutline("black")
         z.setWidth(2)
         z.draw(self.__win) 
-    
+
     def get_coord(self):
         return self.__cube
 
     def cube_translation(self, tx, ty, tz):
-        translated_cube = np.empty((0,3))
+        translated_cube = np.empty((0, 3))
 
         for point in self.__cube:
-            translated_cube = np.append(translated_cube, Transform.translation(point, tx, ty, tz).reshape((1,3)), axis=0)
-        
+            translated_cube = np.append(translated_cube, Transform.translation(
+                point, tx, ty, tz).reshape((1, 3)), axis=0)
+
         self.__cube = translated_cube
 
     def cube_scaling(self, sx, sy, sz):
@@ -57,23 +59,25 @@ class Cube:
         self.__cube = scaled_cube
 
     def cube_shearing(self, shx, shy, shz, sh_type):
-        cube_shearing = np.empty((0,3))
+        sheared_cube = np.empty((0,3))
 
         for point in self.__cube:
-            cube_shearing = np.append(cube_shearing, Transform.shear(point, (shx, shy, shz), sh_type).reshape((1,3)), axis=0)
+            sheared_cube = np.append(sheared_cube, Transform.shear(point, (shx, shy, shz), sh_type).reshape((1,3)), axis=0)
         
-        self.__cube = cube_shearing
-
+        self.__cube = sheared_cube
     
-    # method to project 3d point to 2d point
-    # @staticmethod
     def projection(self, point3D):
-        
+        # if(len(point3D) < 4):
+        #     point3D = np.append(point3D, 1)
+
+        x = point3D[0]
+        y = point3D[1]
+        z = point3D[2]
         angle = math.pi/6
 
-        projection_matrix = np.array([[1,0,0.5*math.cos(angle)],
-                                    [0,1,-0.5*math.sin(angle)],
-                                    [0,0,0]])
+        projection_matrix = np.array([[1, 0, 0.5*math.cos(angle)],
+                                      [0, 1, -0.5*math.sin(angle)],
+                                      [0, 0, 0]])
 
         reflection_matrix = np.array([[1,0,0],
                                       [0,-1,0],
@@ -84,7 +88,7 @@ class Cube:
         return point2D
 
     # method to return 3d cube to 2d cube
-    #@staticmethod
+    # @staticmethod
     def projected_cube(self):
 
         cube = self.__cube
