@@ -20,14 +20,26 @@ def cube():
                     [1,1,1],
                     [0,1,1]])
 
+    cuboid_points = np.array([[0,0,0],
+                         [1.5,0,0],
+                         [1.5,0,1.5],
+                         [0,0,1.5],
+                         [0,1,0],
+                         [1.5,1,0],
+                         [1.5,1,1.5],
+                         [0,1,1.5]])
+
     what_cube = input('''What cube?
                      1. Predefined cube (1x1x1 cube)
-                     2. Userdefined cube (input your own cube)
+                     2. Predefined cuboid
+                     3. Userdefined cube (input your own cube)
                 ''')
 
     if(what_cube == '1'):
         cube1 = Cube(cube_points)
-    elif(what_cube == '2'):
+    elif(what_cube== '2'):
+        cube1 = Cube(cuboid_points)
+    elif(what_cube == '3'):
         for i in range(8):
             print(f"Point - {i+1}")
             for j in range(3):
@@ -41,7 +53,7 @@ def cube():
         os.system('cls' if os.name in ('nt', 'dos') else 'clear')
         print("-----------------------------------------------------")
         transform = (input(
-            """What kind of transformation would you like to do ? 
+            """What kind of transformation would you like to do? 
             1. translation
             2. scale
             3. shear
