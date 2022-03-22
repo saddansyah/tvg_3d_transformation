@@ -146,8 +146,8 @@ class Transform:
             point = np.append(point, 1)
 
         if r_type == "x":
-            return cls.rotationx(point, r_factor[0], r_factor[1])
+            return cls.rotationx(point, r_factor[0])
         elif r_type == "y":
-            return cls.rotationy(point, r_factor[1], r_factor[2])
+            return cls.rotationy(point, r_factor[1])
         elif r_type == "z":
-            return cls.rotationz(point, r_factor[0], r_factor[2])
+            return cls.rotationz(point, r_factor[0])
