@@ -4,12 +4,13 @@ from cube import *
 cube1 = Cube()
 
 # obj cube1 dikenai transformasi seperti di bawah
-cube1.cube_translation(120, 120, 120)
+
 # cube1.cube_scaling(3,3,3)
 # cube1.cube_shearing(0.2,0.2,0.2,'xz')
 # cube1.cube_shearing(0.2,0.2,0.2,'yz')
 # cube1.cube_scaling(0.5, 0.2, 0.5)
-cube1.cube_rotating(0, 0, 0, 'x')
+cube1.cube_rotating(30, 0, 0, 'z') # dalam derajat
+# cube1.cube_translation(120, 120, 120)
 
 print(cube1.get_coord())
 
