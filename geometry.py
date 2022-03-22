@@ -42,7 +42,7 @@ class Geometry:
         roteted_geometry = np.empty((0,3))
 
         for point in self.__geometry:
-            roteted_geometry = np.append(roteted_geometry, Transform.rotation(point, (rx, ry, rz), r_type).reshape((1,3)), axis=0)
+            roteted_geometry = np.append(roteted_geometry, Transform.rotation(point, (-rx, -ry, -rz), r_type).reshape((1,3)), axis=0)
         
         self.__geometry = roteted_geometry        
 

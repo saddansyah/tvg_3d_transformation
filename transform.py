@@ -14,7 +14,7 @@ class Transform:
         x = point3D[0]
         y = point3D[1]
         z = point3D[2]
-        angle = math.pi/6
+        angle = math.pi/4
 
         projection_matrix = np.array([[1, 0, 0.5*math.cos(angle)],
                                       [0, 1, -0.5*math.sin(angle)],

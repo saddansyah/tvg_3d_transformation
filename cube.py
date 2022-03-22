@@ -25,22 +25,22 @@ class Cube(Geometry):
     
     def draw_cartesian(self, marginx, marginy):
 
-        cartesian_line = [
+        self.__cartesian_line = [
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
                  Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy)),
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
                  Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height)),
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height)),
+                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__width)),
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
                  Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy)),
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
                  Point(self.__origin[0] + marginx, self.__origin[1] + marginy + self.__height)),
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy - self.__height)),
+                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy - self.__width)),
         ]
 
-        for line in cartesian_line:
+        for line in  self.__cartesian_line:
             line.setOutline("black")
             line.setWidth(2)
             line.draw(self.win)
