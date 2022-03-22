@@ -38,6 +38,26 @@ class Cube(Geometry):
             line.setWidth(2)
             line.draw(self.win)
 
+        for i in range(-9, 9):
+            text = Text(Point(self.__origin[0] + marginx + 80*i, self.__origin[1] + marginy + 10), str(i))
+            text.draw(self.win)
+
+        for i in range(-5, 0):
+            text = Text(Point(self.__origin[0] + marginx - 10, self.__origin[1] + marginy - 80*i), str(i))
+            text.draw(self.win)
+
+        for i in range(1, 5):
+            text = Text(Point(self.__origin[0] + marginx - 10, self.__origin[1] + marginy - 80*i), str(i))
+            text.draw(self.win)
+
+        for i in range(1, 13):
+            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i))
+            text.draw(self.win)
+
+        for i in range(-14, 0):
+            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i))
+            text.draw(self.win)
+
     def get_coord(self):
         return super().get_coord()
 
