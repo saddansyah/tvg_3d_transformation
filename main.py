@@ -4,7 +4,7 @@ import math
 from transform import *
 
 class Cube:
-    def __init__(self):
+    def __init__(self, screen_width, screen_height):
         self.__scaling = 100
         self.__cube = np.array([[0,0,0],
                                 [1,0,0],
@@ -14,6 +14,28 @@ class Cube:
                                 [1,1,0],
                                 [1,1,1],
                                 [0,1,1]])*self.__scaling
+        
+        self.__origin = self.__cube
+        self.__width = screen_width
+        self.__height = screen_height
+        self.__win = GraphWin("My Window", self.__width, self.__height)
+        self.__win.setBackground(color_rgb(218, 91, 91))
+
+    def __draw_cartesian(self, marginx, marginy):
+        x = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx + self.__width, self.__origin[0][1] + marginy))
+        x.setOutline("black")
+        x.setWidth(2)
+        x.draw(self.__win)   
+
+        y = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy - self.__height))
+        y.setOutline("black")
+        y.setWidth(2)
+        y.draw(self.__win) 
+
+        z = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx - self.__width, self.__origin[0][1] + marginy + self.__height))
+        z.setOutline("black")
+        z.setWidth(2)
+        z.draw(self.__win) 
     
     def get_coord(self):
         return self.__cube
@@ -26,22 +48,38 @@ class Cube:
         
         self.__cube = translated_cube
 
+    def cube_scaling(self, sx, sy, sz):
+        scaled_cube = np.empty((0,3))
+
+        for point in self.__cube:
+            scaled_cube = np.append(scaled_cube, Transform.scaling(point, sx, sy, sz).reshape((1,3)), axis=0)
+        
+        self.__cube = scaled_cube
+
+    def cube_shearing(self, shx, shy, shz, sh_type):
+        cube_shearing = np.empty((0,3))
+
+        for point in self.__cube:
+            cube_shearing = np.append(cube_shearing, Transform.shear(point, (shx, shy, shz), sh_type).reshape((1,3)), axis=0)
+        
+        self.__cube = cube_shearing
+
+    
     # method to project 3d point to 2d point
     # @staticmethod
     def projection(self, point3D):
-        # if(len(point3D) < 4):
-        #     point3D = np.append(point3D, 1)
         
-        x = point3D[0]
-        y = point3D[1]
-        z = point3D[2]
         angle = math.pi/6
 
         projection_matrix = np.array([[1,0,0.5*math.cos(angle)],
                                     [0,1,-0.5*math.sin(angle)],
                                     [0,0,0]])
 
-        point2D = projection_matrix @ point3D
+        reflection_matrix = np.array([[1,0,0],
+                                      [0,-1,0],
+                                      [0,0,1]])
+
+        point2D = projection_matrix @ reflection_matrix @ point3D
 
         return point2D
 
@@ -57,58 +95,91 @@ class Cube:
 
         print(projected_cube)
         return projected_cube
+    
+    def draw_cube(self, point: list):
+        marginx = 350
+        marginy = 500
+        # point *= 100
 
-    @staticmethod
-    def draw_cube(point: list):
-        width = 1200
-        height = 720
-        margin = 100
-        point *= 100
-        
-        win = GraphWin("My Window", width, height)
-        win.setBackground(color_rgb(218, 91, 91))
+        self.__draw_cartesian(marginx, marginy)
 
-        back = Rectangle(Point(point[3][0] + margin, point[3][1] + margin), Point(point[6][0] + margin, point[6][1] + margin))
-        back.setOutline("white")
-        back.setWidth(5)
-        back.draw(win)
+        # back side
 
-        front = Rectangle(Point(point[0][0] + margin, point[0][1] + margin), Point(point[5][0] + margin, point[5][1] + margin))
-        front.setOutline("grey")
-        front.setWidth(5)
-        front.draw(win)
+        back_ln1 = Line(Point(point[7][0] + marginx, point[7][1] + marginy), Point(point[6][0] + marginx, point[6][1] + marginy))
+        back_ln1.setOutline("grey")
+        back_ln1.setWidth(5)
+        back_ln1.draw(self.__win)  
 
-        ln1 = Line(Point(point[4][0] + margin, point[4][1] + margin), Point(point[7][0] + margin, point[7][1] + margin))
+        back_ln2 = Line(Point(point[6][0] + marginx, point[6][1] + marginy), Point(point[2][0] + marginx, point[2][1] + marginy))
+        back_ln2.setOutline("grey")
+        back_ln2.setWidth(5)
+        back_ln2.draw(self.__win)
+
+        back_ln3 = Line(Point(point[2][0] + marginx, point[2][1] + marginy), Point(point[3][0] + marginx, point[3][1] + marginy))
+        back_ln3.setOutline("grey")
+        back_ln3.setWidth(5)
+        back_ln3.draw(self.__win)
+
+        back_ln4 = Line(Point(point[3][0] + marginx, point[3][1] + marginy), Point(point[7][0] + marginx, point[7][1] + marginy))
+        back_ln4.setOutline("grey")
+        back_ln4.setWidth(5)
+        back_ln4.draw(self.__win)
+
+        # side      
+
+        ln1 = Line(Point(point[4][0] + marginx, point[4][1] + marginy), Point(point[7][0] + marginx, point[7][1] + marginy))
         ln1.setOutline("blue")
         ln1.setWidth(5)
-        ln1.draw(win)
+        ln1.draw(self.__win)
 
-        ln2 = Line(Point(point[5][0] + margin, point[5][1] + margin), Point(point[6][0] + margin, point[6][1] + margin))
+        ln2 = Line(Point(point[5][0] + marginx, point[5][1] + marginy), Point(point[6][0] + marginx, point[6][1] + marginy))
         ln2.setOutline("yellow")
         ln2.setWidth(5)
-        ln2.draw(win)
+        ln2.draw(self.__win)
 
-        ln3 = Line(Point(point[1][0] + margin, point[1][1] + margin), Point(point[2][0] + margin, point[2][1] + margin))
+        ln3 = Line(Point(point[1][0] + marginx, point[1][1] + marginy), Point(point[2][0] + marginx, point[2][1] + marginy))
         ln3.setOutline("green")
         ln3.setWidth(5)
-        ln3.draw(win)
+        ln3.draw(self.__win)
 
-        ln4 = Line(Point(point[0][0] + margin, point[0][1] + margin), Point(point[3][0] + margin, point[3][1] + margin))
+        ln4 = Line(Point(point[0][0] + marginx, point[0][1] + marginy), Point(point[3][0] + marginx, point[3][1] + marginy))
         ln4.setOutline("red")
         ln4.setWidth(5)
-        ln4.draw(win)
+        ln4.draw(self.__win)
 
-        win.getMouse()
-        win.close()  
+        # front side side
 
+        front_ln1 = Line(Point(point[4][0] + marginx, point[4][1] + marginy), Point(point[5][0] + marginx, point[5][1] + marginy))
+        front_ln1.setOutline("white")
+        front_ln1.setWidth(5)
+        front_ln1.draw(self.__win)
 
-# pemanaggilan class
-cube1 = Cube()
-# print(cube1.get_coord())
+        front_ln2 = Line(Point(point[5][0] + marginx, point[5][1] + marginy), Point(point[1][0] + marginx, point[1][1] + marginy))
+        front_ln2.setOutline("white")
+        front_ln2.setWidth(5)
+        front_ln2.draw(self.__win)
+
+        front_ln3 = Line(Point(point[1][0] + marginx, point[1][1] + marginy), Point(point[0][0] + marginx, point[0][1] + marginy))
+        front_ln3.setOutline("white")
+        front_ln3.setWidth(5)
+        front_ln3.draw(self.__win)
+
+        front_ln4 = Line(Point(point[0][0] + marginx, point[0][1] + marginy), Point(point[4][0] + marginx, point[4][1] + marginy))
+        front_ln4.setOutline("white")
+        front_ln4.setWidth(5)
+        front_ln4.draw(self.__win)        
+
+        self.__win.getMouse()
+        self.__win.close()  
+
+# instance objek cube1 
+cube1 = Cube(1280, 720)
+
+# obj cube1 dikenai transformasi seperti di bawah
 cube1.cube_translation(10, 10, 10)
-print(cube1.get_coord())
-projected_cube1 = cube1.projected_cube()
-# print(cube1.get_coord())
-# print(projected_cube1)
-cube1.draw_cube(projected_cube1)
+# cube1.cube_scaling(3,3,3)
+cube1.cube_shearing(0.5,0.5,0.5,'xz')
+
+# koordinat 3d cube1 diprojeksikan menggunakan cabinet projection method biar bisa ditampilin di 2d (di layar)
+cube1.draw_cube(cube1.projected_cube())
 
