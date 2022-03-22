@@ -51,11 +51,11 @@ class Cube(Geometry):
             text.draw(self.win)
 
         for i in range(1, 13):
-            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i))
+            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i*-1))
             text.draw(self.win)
 
         for i in range(-14, 0):
-            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i))
+            text = Text(Point(self.__origin[0] + marginx + 28.5*i, self.__origin[1] + marginy - 18 - 28.5*i), str(i*-1))
             text.draw(self.win)
 
     def get_coord(self):

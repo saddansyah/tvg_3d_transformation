@@ -18,7 +18,7 @@ class Geometry:
 
         for point in self.__geometry:
             translated_geometry = np.append(translated_geometry, Transform.translation(
-                point, tx, ty, tz, self.__scaling).reshape((1, 3)), axis=0)
+                point, tx, ty, -tz, self.__scaling).reshape((1, 3)), axis=0)
 
         self.__geometry = translated_geometry
 
@@ -42,7 +42,7 @@ class Geometry:
         rotated_geometry = np.empty((0,3))
 
         for point in self.__geometry:
-            rotated_geometry = np.append(rotated_geometry, Transform.rotation(point, (-rx, -ry, -rz), r_type, (r_axisx, r_axisy, r_axisz)).reshape((1,3)), axis=0)
+            rotated_geometry = np.append(rotated_geometry, Transform.rotation(point, (-rx, -ry, rz), r_type, (r_axisx, r_axisy, r_axisz)).reshape((1,3)), axis=0)
         
         self.__geometry = rotated_geometry        
 
