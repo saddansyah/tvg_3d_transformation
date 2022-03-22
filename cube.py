@@ -25,26 +25,46 @@ class Cube(Geometry):
         self.__origin = np.zeros(3)
     
     def draw_cartesian(self, marginx, marginy):
-        x = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy))
+        # x = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+        #          Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy))
         
-        x.setOutline("black")
-        x.setWidth(2)
-        x.draw(self.win)   
+        # x.setOutline("black")
+        # x.setWidth(2)
+        # x.draw(self.win)   
 
-        y = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-                 Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height))
+        # y = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+        #          Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height))
         
-        y.setOutline("black")
-        y.setWidth(2)
-        y.draw(self.win) 
+        # y.setOutline("black")
+        # y.setWidth(2)
+        # y.draw(self.win) 
 
-        z = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height))
+        # z = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+        #          Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height))
         
-        z.setOutline("black")
-        z.setWidth(2)
-        z.draw(self.win) 
+        # z.setOutline("black")
+        # z.setWidth(2)
+        # z.draw(self.win) 
+
+        cartesian_line = [
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy)),
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height)),
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height)),
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy)),
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx, self.__origin[1] + marginy + self.__height)),
+            Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy - self.__height)),
+        ]
+
+        for line in cartesian_line:
+            line.setOutline("black")
+            line.setWidth(2)
+            line.draw(self.win)
 
     def get_coord(self):
         return super().get_coord()
@@ -66,7 +86,7 @@ class Cube(Geometry):
 
     def draw_geometry(self, point: list):
         self.init_screen()
-        
+
         marginx = 350
         marginy = 500
         # point *= 100
