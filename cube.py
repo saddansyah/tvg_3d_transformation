@@ -1,5 +1,4 @@
 import numpy as np
-from graphics import *
 from geometry import *
 
 class Cube(Geometry):
