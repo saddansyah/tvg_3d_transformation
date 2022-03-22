@@ -150,4 +150,4 @@ class Transform:
         elif r_type == "y":
             return cls.rotationy(point, r_factor[1])
         elif r_type == "z":
-            return cls.rotationz(point, r_factor[0])
+            return cls.rotationz(point, r_factor[2])
