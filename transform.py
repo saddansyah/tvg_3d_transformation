@@ -4,6 +4,28 @@ import math
 class Transform:
     def __init__(self):
         pass
+
+    @staticmethod
+    def projection(point3D):
+        # if(len(point3D) < 4):
+        #     point3D = np.append(point3D, 1)
+
+        x = point3D[0]
+        y = point3D[1]
+        z = point3D[2]
+        angle = math.pi/6
+
+        projection_matrix = np.array([[1, 0, 0.5*math.cos(angle)],
+                                      [0, 1, -0.5*math.sin(angle)],
+                                      [0, 0, 0]])
+
+        reflection_matrix = np.array([[1,0,0],
+                                      [0,-1,0],
+                                      [0,0,1]])
+
+        point2D = projection_matrix @ reflection_matrix @ point3D
+
+        return point2D
     
     @staticmethod
     def translation(point: np.ndarray, tx, ty, tz):

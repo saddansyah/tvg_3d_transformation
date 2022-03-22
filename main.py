@@ -16,24 +16,27 @@ class Cube:
                                 [1,1,1],
                                 [0,1,1]])*self.__scaling
         
-        self.__origin = self.__cube
+        self.__origin = np.zeros(3)
         self.__width = screen_width
         self.__height = screen_height
         self.__win = GraphWin("My Window", self.__width, self.__height)
         self.__win.setBackground(color_rgb(218, 91, 91))
 
     def __draw_cartesian(self, marginx, marginy):
-        x = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx + self.__width, self.__origin[0][1] + marginy))
+        x = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy))
         x.setOutline("black")
         x.setWidth(2)
         x.draw(self.__win)   
 
-        y = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy - self.__height))
+        y = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height))
         y.setOutline("black")
         y.setWidth(2)
         y.draw(self.__win) 
 
-        z = Line(Point(self.__origin[0][0] + marginx, self.__origin[0][1] + marginy), Point(self.__origin[0][0] + marginx - self.__width, self.__origin[0][1] + marginy + self.__height))
+        z = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
+                 Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height))
         z.setOutline("black")
         z.setWidth(2)
         z.draw(self.__win) 
@@ -65,27 +68,6 @@ class Cube:
             sheared_cube = np.append(sheared_cube, Transform.shear(point, (shx, shy, shz), sh_type).reshape((1,3)), axis=0)
         
         self.__cube = sheared_cube
-    
-    def projection(self, point3D):
-        # if(len(point3D) < 4):
-        #     point3D = np.append(point3D, 1)
-
-        x = point3D[0]
-        y = point3D[1]
-        z = point3D[2]
-        angle = math.pi/6
-
-        projection_matrix = np.array([[1, 0, 0.5*math.cos(angle)],
-                                      [0, 1, -0.5*math.sin(angle)],
-                                      [0, 0, 0]])
-
-        reflection_matrix = np.array([[1,0,0],
-                                      [0,-1,0],
-                                      [0,0,1]])
-
-        point2D = projection_matrix @ reflection_matrix @ point3D
-
-        return point2D
 
     # method to return 3d cube to 2d cube
     # @staticmethod
@@ -95,7 +77,7 @@ class Cube:
         projected_cube = []
 
         for point in cube:
-            projected_cube.append(self.projection(point).tolist())
+            projected_cube.append(Transform.projection(point).tolist())
 
         print(projected_cube)
         return projected_cube
@@ -180,7 +162,7 @@ class Cube:
 cube1 = Cube(1280, 720)
 
 # obj cube1 dikenai transformasi seperti di bawah
-cube1.cube_translation(10, 10, 10)
+cube1.cube_translation(0, 0, 0)
 # cube1.cube_scaling(3,3,3)
 cube1.cube_shearing(0.5,0.5,0.5,'xz')
 
