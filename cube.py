@@ -18,7 +18,6 @@ class Cube(Geometry):
 
         self.__width = 1280
         self.__height = 720
-        self.init_screen()
 
     def init_screen(self):
         self.win = GraphWin("My Window", self.__width, self.__height)
@@ -66,13 +65,15 @@ class Cube(Geometry):
         return super().projected_geometry()
 
     def draw_geometry(self, point: list):
+        self.init_screen()
+        
         marginx = 350
         marginy = 500
         # point *= 100
 
         self.draw_cartesian(marginx, marginy)
 
-        lines = [
+        self.__lines = [
             Line(Point(point[0][0] + marginx, point[0][1] + marginy), Point(point[1][0] + marginx, point[1][1] + marginy)),
             Line(Point(point[1][0] + marginx, point[1][1] + marginy), Point(point[2][0] + marginx, point[2][1] + marginy)),
             Line(Point(point[2][0] + marginx, point[2][1] + marginy), Point(point[3][0] + marginx, point[3][1] + marginy)),
@@ -89,12 +90,13 @@ class Cube(Geometry):
             Line(Point(point[3][0] + marginx, point[3][1] + marginy), Point(point[7][0] + marginx, point[7][1] + marginy))
         ]
         
-        for line in lines:
+        for line in self.__lines:
             line.setOutline("white")
             line.setWidth(3)
             line.draw(self.win)
 
         self.win.getMouse()
         self.win.close()
+
     
 

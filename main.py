@@ -1,19 +1,35 @@
 from cube import *
+import os
 
-# instance objek cube1 
+# membuat objek cube1
 cube1 = Cube()
 
-# obj cube1 dikenai transformasi seperti di bawah
+while True:
+    print("-----------------------------------------------------")
+    transform = input("translation/scale/shear/rotation ? (type 'stop or STOP' to stop) ")
 
-cube1.cube_scaling(3,3,3)
-# cube1.cube_shearing(0.2,0.2,0.2,'xz')
-# cube1.cube_shearing(0.2,0.2,0.2,'yz')
-# cube1.cube_scaling(0.5, 0.2, 0.5)
-cube1.cube_rotating(0, 0, 30, 'z') # dalam derajat
-# cube1.cube_translation(20, 20, 20)
+    if transform.lower() == 'stop':
+        break
 
-print(cube1.get_coord())
+    x = int(input('x: '))
+    y = int(input('y: '))
+    z = int(input('z: '))
 
-# koordinat 3d cube1 diprojeksikan menggunakan cabinet projection method biar bisa ditampilin di 2d (di layar)
-
-cube1.draw_geometry(cube1.projected_cube())
+    if (transform == 'rotation'):
+        type = input('x / y / z ?')
+        cube1.cube_rotating(x,y,z, type)
+        cube1.draw_geometry(cube1.projected_cube())
+    elif (transform == 'shear'):
+        type = input('xy / yz / xz ?')
+        cube1.cube_shearing(x,y,z, type)
+        cube1.draw_geometry(cube1.projected_cube())
+    elif (transform == 'translation'):
+        cube1.cube_translation(x,y,z)
+        cube1.draw_geometry(cube1.projected_cube())
+    elif (transform == 'scale'):
+        cube1.cube_scaling(x,y,z)
+        cube1.draw_geometry(cube1.projected_cube())
+    else:
+        print("error on input, try again")
+    
+    os.system('cls' if os.name in ('nt', 'dos') else 'clear')
