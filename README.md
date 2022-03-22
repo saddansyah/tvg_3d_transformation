@@ -1,7 +1,9 @@
 ## 3D Transformation with [graphics.py](https://mcsp.wartburg.edu/zelle/python/)
- Tugas Kelompok TVG - Kelompok 10
 
- ##### Anggota:
+Tugas Kelompok TVG - Kelompok 10
+
+##### Anggota:
+
 <table>
     <tr>
         <th>Nama</th>
@@ -20,7 +22,7 @@
         <td>460546</td>
     <tr>
     <tr>
-        <td>Luthfi Izzudin Hanif</td>
+        <td>Luthfi Izzuddin Hanif</td>
         <td>463605</td>
     <tr>
     <tr>
