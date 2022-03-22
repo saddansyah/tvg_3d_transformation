@@ -97,3 +97,48 @@ class Transform:
             return cls.shearyz(point, sh_factor[1], sh_factor[2])
         elif sh_type == "xz":
             return cls.shearxz(point, sh_factor[0], sh_factor[2])
+        
+    @staticmethod
+    def rotasix(point: np.ndarray, rx):
+        if(len(point) < 4):
+            point = np.append(point, 1)
+            
+        rotasix_matrix = np.array([[1,0,0,0],
+                                    [0,np.cos(np.radians(angle)),-np.sin(np.radians(angle)),0],
+                                    [0,np.sin(np.radians(angle)),np.cos(np.radians(angle)),0],
+                                    [0,0,0,1]])
+        return (rotasix_matrix @ point)[:-1]
+    
+    @staticmethod
+    def rotasiy(point : np.ndarray, ry):
+        if(len(point) < 4):
+            point = np.append(point, 1)
+
+        rotasiy_matrix = np.array([[np.cos(np.radians(angle)),0,np.sin(np.radians(angle)),0],
+                                   [0,1,0,0],
+                                   [-np.sin(np.radians(angle)),0,np.cos(np.radians(angle)),0],
+                                   [0,0,0,1]])
+        return (rotasiy_matrix @ point)[:-1]
+
+    @staticmethod
+    def rotasiz(point : np.ndarray, rz):
+        if(len(point) < 4):
+            point = np,append(point, 1)
+
+        rotasiz_matrix = np.array([[np.cos(np.radians(angle)),-np.sin(np.radians(angle)),0,0],
+                                   [np.sin(np.radians(angle)),np.cos(np.radians(angle)),0,0],
+                                   [0,0,1,0],
+                                   [0,0,0,1]])
+        return (rotasiz_matrix @ point)[:-1]
+
+    @classmethod
+    def rotasi(cls, point: np.ndarray, r_factor: tuple, r_type: str):
+        if(len(point) < 4):
+            point = np.append(point, 1)
+
+        if r_type == "x":
+            return cls.rotasix(point, r_factor[0], r_factor[1])
+        elif r_type == "y":
+            return cls.rotasiy(point, r_factor[1], r_factor[2])
+        elif r_type == "z":
+            return cls.rotasiz(point, r_factor[0], r_factor[2])
