@@ -24,15 +24,10 @@ class Transform:
                                       [0, -1, 0],
                                       [0, 0, 1]])
 
-        point2D = projection_matrix @ reflection_matrix @ point3D
-
-        return point2D
+        return projection_matrix @ reflection_matrix @ point3D
 
     @staticmethod
     def translation(point: np.ndarray, tx, ty, tz):
-        # ty dibuat minus karena pergerakannya pada sumbu kartesian berbalik arah
-        # misal ty += 100, maka akan digeser kebawah 100 satuan tidak seperti kartesian yang digeser ke atas 100 satuan
-
         if(len(point) < 4):
             point = np.append(point, 1)
 

@@ -25,26 +25,6 @@ class Cube(Geometry):
         self.__origin = np.zeros(3)
     
     def draw_cartesian(self, marginx, marginy):
-        # x = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-        #          Point(self.__origin[0] + marginx + self.__width, self.__origin[1] + marginy))
-        
-        # x.setOutline("black")
-        # x.setWidth(2)
-        # x.draw(self.win)   
-
-        # y = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-        #          Point(self.__origin[0] + marginx, self.__origin[1] + marginy - self.__height))
-        
-        # y.setOutline("black")
-        # y.setWidth(2)
-        # y.draw(self.win) 
-
-        # z = Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
-        #          Point(self.__origin[0] + marginx - self.__width, self.__origin[1] + marginy + self.__height))
-        
-        # z.setOutline("black")
-        # z.setWidth(2)
-        # z.draw(self.win) 
 
         cartesian_line = [
             Line(Point(self.__origin[0] + marginx, self.__origin[1] + marginy), 
@@ -89,7 +69,6 @@ class Cube(Geometry):
 
         marginx = 350
         marginy = 500
-        # point *= 100
 
         self.draw_cartesian(marginx, marginy)
 

@@ -5,15 +5,17 @@ import os
 cube1 = Cube()
 
 while True:
+    os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+    
     print("-----------------------------------------------------")
     transform = input("translation/scale/shear/rotation ? (type 'stop or STOP' to stop) ")
 
     if transform.lower() == 'stop':
         break
 
-    x = int(input('x: '))
-    y = int(input('y: '))
-    z = int(input('z: '))
+    x = float(input('x: '))
+    y = float(input('y: '))
+    z = float(input('z: '))
 
     if (transform == 'rotation'):
         type = input('x / y / z ?')
@@ -31,5 +33,3 @@ while True:
         cube1.draw_geometry(cube1.projected_cube())
     else:
         print("error on input, try again")
-    
-    os.system('cls' if os.name in ('nt', 'dos') else 'clear')
