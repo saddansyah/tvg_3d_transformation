@@ -11,12 +11,6 @@ class Transform:
 
     @staticmethod
     def projection(point3D):
-        # if(len(point3D) < 4):
-        #     point3D = np.append(point3D, 1)
-
-        x = point3D[0]
-        y = point3D[1]
-        z = point3D[2]
         angle = math.pi/4
 
         projection_matrix = np.array([[1, 0, 0.5*math.cos(angle)],
@@ -36,9 +30,9 @@ class Transform:
         if(len(point) < 4):
             point = np.append(point, 1)
 
-        translation_matrix = np.array([[1, 0, 0, tx*scaling],
-                                       [0, 1, 0, ty*scaling],
-                                       [0, 0, 1, tz*scaling],
+        translation_matrix = np.array([[1, 0, 0, tx*__scaling],
+                                       [0, 1, 0, ty*__scaling],
+                                       [0, 0, 1, tz*__scaling],
                                        [0, 0, 0, 1]])
         return (translation_matrix @ point)[:-1]
 

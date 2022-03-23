@@ -8,47 +8,8 @@
 from cube import *
 import os
 
-# kubus
-def cube():
-
-    cube_points = np.array([[0,0,0],
-                    [1,0,0],
-                    [1,0,1],
-                    [0,0,1],
-                    [0,1,0],
-                    [1,1,0],
-                    [1,1,1],
-                    [0,1,1]])
-
-    cuboid_points = np.array([[0,0,0],
-                         [1.5,0,0],
-                         [1.5,0,1.5],
-                         [0,0,1.5],
-                         [0,1,0],
-                         [1.5,1,0],
-                         [1.5,1,1.5],
-                         [0,1,1.5]])
-
-    what_cube = input('''What cube?
-                     1. Predefined cube (1x1x1 cube)
-                     2. Predefined cuboid
-                     3. Userdefined cube (input your own cube)
-                ''')
-
-    if(what_cube == '1'):
-        cube1 = Cube(cube_points)
-    elif(what_cube== '2'):
-        cube1 = Cube(cuboid_points)
-    elif(what_cube == '3'):
-        for i in range(8):
-            print(f"Point - {i+1}")
-            for j in range(3):
-                point = int(input(f'Coordinate-{chr(j+120)}: '))
-                cube_points[i][j] = point
-        cube1 = Cube(cube_points)
-
-    # cube1 = Cube(cube)
-
+# interface
+def interface(geometry):
     while True:
         os.system('cls' if os.name in ('nt', 'dos') else 'clear')
         print("-----------------------------------------------------")
@@ -74,24 +35,67 @@ def cube():
             r_axisz = float(input('rotate from z: '))
             print(f"rotate from point = ({round(r_axisx, 2)}, {round(r_axisy, 2)}, {round(r_axisz, 2)})")
             type = input('choose: x / y / z ? ')
-            cube1.cube_rotating(x,y,z,type,r_axisx,r_axisy,r_axisz)
-            cube1.undraw_geometry()
-            cube1.draw_geometry(cube1.projected_cube())
+            geometry.cube_rotating(x,y,z,type,r_axisx,r_axisy,r_axisz)
+            geometry.undraw_geometry()
+            geometry.draw_geometry(geometry.projected_cube())
         elif (transform == '3'):
             type = input('choose: xy / yz / xz ? ')
-            cube1.cube_shearing(x,y,z, type)
-            cube1.undraw_geometry()
-            cube1.draw_geometry(cube1.projected_cube())
+            geometry.cube_shearing(x,y,z, type)
+            geometry.undraw_geometry()
+            geometry.draw_geometry(geometry.projected_cube())
         elif (transform == '1'):
-            cube1.cube_translation(x,y,z)
-            print(cube1.get_coord())
-            cube1.undraw_geometry()
-            cube1.draw_geometry(cube1.projected_cube())
+            geometry.cube_translation(x,y,z)
+            print(geometry.get_coord())
+            geometry.undraw_geometry()
+            geometry.draw_geometry(geometry.projected_cube())
         elif (transform == '2'):
-            cube1.cube_scaling(x,y,z)
-            cube1.undraw_geometry()
-            cube1.draw_geometry(cube1.projected_cube())
+            geometry.cube_scaling(x,y,z)
+            geometry.undraw_geometry()
+            geometry.draw_geometry(geometry.projected_cube())
         else:
             print("error on input, please try again")
+
+# kubus
+def cube():
+    cube_points = np.array([[0,0,0],
+                    [1,0,0],
+                    [1,0,1],
+                    [0,0,1],
+                    [0,1,0],
+                    [1,1,0],
+                    [1,1,1],
+                    [0,1,1]])
+
+    cuboid_points = np.array([[0,0,0],
+                         [1.5,0,0],
+                         [1.5,0,1.5],
+                         [0,0,1.5],
+                         [0,1,0],
+                         [1.5,1,0],
+                         [1.5,1,1.5],
+                         [0,1,1.5]])
+    
+    os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+    what_cube = input('''What cube?
+                     1. Predefined cube (1x1x1 cube)
+                     2. Predefined cuboid
+                     3. Userdefined cube (input your own cube)
+                ''')
+
+    if(what_cube == '1'):
+        cube1 = Cube(cube_points)
+    elif(what_cube== '2'):
+        cube1 = Cube(cuboid_points)
+    elif(what_cube == '3'):
+        for i in range(8):
+            print(f"Point - {i+1}")
+            for j in range(3):
+                point = int(input(f'Coordinate-{chr(j+120)}: '))
+                cube_points[i][j] = point
+        cube1 = Cube(cube_points)
+
+    interface(cube1)
+        
+
 
 cube()
