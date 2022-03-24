@@ -66,3 +66,7 @@ class Geometry:
     @abstractmethod
     def draw_geometry(self):
         pass
+
+    @abstractmethod
+    def undraw_geometry(self):
+        pass

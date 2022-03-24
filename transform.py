@@ -139,7 +139,7 @@ class Transform:
         if(len(point) < 4):
             point = np.append(point, 1)
 
-        point = Transform.translation(point, -r_axis[0], -r_axis[1], -r_axis[2], cls.__scaling)
+        point = cls.translation(point, -r_axis[0], -r_axis[1], -r_axis[2], cls.__scaling)
 
         if r_type == "x":
             point = cls.rotationx(point, r_factor[0])
@@ -148,4 +148,4 @@ class Transform:
         elif r_type == "z":
             point =  cls.rotationz(point, r_factor[2])
 
-        return Transform.translation(point, r_axis[0], r_axis[1], r_axis[2], cls.__scaling)
+        return cls.translation(point, r_axis[0], r_axis[1], r_axis[2], cls.__scaling)

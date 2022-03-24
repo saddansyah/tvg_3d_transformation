@@ -45,7 +45,6 @@ def interface(geometry):
             geometry.draw_geometry(geometry.projected_cube())
         elif (transform == '1'):
             geometry.cube_translation(x,y,z)
-            print(geometry.get_coord())
             geometry.undraw_geometry()
             geometry.draw_geometry(geometry.projected_cube())
         elif (transform == '2'):
@@ -96,6 +95,4 @@ def cube():
 
     interface(cube1)
         
-
-
 cube()
